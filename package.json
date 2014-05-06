@@ -1,0 +1,29 @@
+{
+  "name": "swagger-restify-express",
+  "version": "0.0.1",
+  "description": "This module will automagically wire your restify and express paths to swagger framework.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jasmine-node spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/manojkumarmc/swagger-restify-express.git"
+  },
+  "keywords": [
+    "swagger",
+    "restify",
+    "express"
+  ],
+  "author": "Manoj Kumar MC",
+  "license": "Apache",
+  "bugs": {
+    "url": "https://github.com/manojkumarmc/swagger-restify-express/issues"
+  },
+  "dependencies": {
+    "swagger-doc": "~0.2.0",
+    "express": "~4.1.1",
+    "restify": "~2.7.0",
+    "swagger-ui": "~2.0.16"
+  }
+}
