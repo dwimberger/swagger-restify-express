@@ -1,7 +1,7 @@
-CLKS Swagger
+swagger-restify-express
 =========
 <br>
-CLKS Swagger is a layer which will enable easy documentation of REST layer
+This package will automagically wire your restify and express paths to swagger framework.
 <br><br>
 
 #### Make sure that your REST library is "restify"
@@ -34,7 +34,7 @@ server.get('/acs/:id/getit/:here', function(req, res) {
   res.send('hello from my REST server ' + req.params.name);
 });
 
-server.post('/offload', streamOffloader.offload);
+server.post('/offload', someClass.offload);
 
 cs.init(server, {resourceName : 'swag'})
 
