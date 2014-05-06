@@ -124,14 +124,14 @@ function extendObject(object, inheritFromObj) {
 function bootStrap(serverObj) {
 
     if (getServerName('express')) {
-	serverObj.use(express.static(swaggerParamsFromServer.staticResourceFolder))
+	serverObj.use(express.static(__dirname + '/node_modules/swagger-ui/dist'))
         serverObj.get('/index.html', function(req, res) {
-	    res.sendfile(swaggerParamsFromServer.staticResourceFolder + '/index.html')
+	    res.sendfile(__dirname + '/node_modules/swagger-ui/dist/index.html')
 	})
         ignoreList.push('/index.html')
     } else {
 	serverObj.get(/index\.html|\/css\/?.*|\/lib\/?.*|\/images\/?.*|\.js/, restify.serveStatic({
-	    'directory': './node_modules/swagger-ui/dist',
+	    'directory': __dirname + '/node_modules/swagger-ui/dist',
 	    'default': 'index.html'
 	}))	
     }
