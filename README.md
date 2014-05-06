@@ -9,20 +9,13 @@ CLKS Swagger is a layer which will enable easy documentation of REST layer
 npm install restify
 var restify =  require('restify')
 ```
-<br><br>
-
-#### Make sure that "swagger-ui" and "swagger-doc" is installed in your node.js server.
-```console
-npm install swagger-ui
-npm install swagger-doc
-```
-<br><br>
+<br>
 
 #### Include clks-swagger where the REST paths are defined.
 ```console
 cs = require('swagger-restify-express')
 ```
-<br><br>
+<br>
 
 #### Have the restify server running
 ```console
@@ -49,7 +42,7 @@ server.listen(3000, function() {
   console.log('%s listening at %s', server.name, server.url);
 });
 ```
-<br><br>
+<br>
 #### Make sure that you add the line, if you are using restify.
 ```console
 cs.init(server, {resourceName : 'swag', // resource name
@@ -62,19 +55,18 @@ cs.init(app, {resourceName: 'token', // resource name
               server : 'express',    // server library name
 	      staticResourceFolder: __dirname + '/node_modules/swagger-ui/dist'})
 ```
-
-<br><br>  
+<br>
 #### Crank up your server
 ```sh
 node app.js
 ```
-<br><br>
+<br>
 #### Open up your browser
 ```sh
 http://localhost:3000/index.html
 ```
 
-<br><br>
+<br>
 #### In your resource entry edit box
 ```console
 http://localhost:3000/swag
