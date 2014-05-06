@@ -13,7 +13,7 @@ var restify =  require('restify')
 
 #### Include clks-swagger where the REST paths are defined.
 ```console
-cs = require('swagger-restify-express')
+sre = require('swagger-restify-express')
 ```
 <br>
 
@@ -36,25 +36,28 @@ server.get('/acs/:id/getit/:here', function(req, res) {
 
 server.post('/offload', someClass.offload);
 
-cs.init(server, {resourceName : 'swag'})
+sre.init(server, {
+		  resourceName : 'swag',
+		  server : 'restify', // or express
+		  httpMethods : ['GET', 'POST']
+		}
+       )
 
 server.listen(3000, function() {
   console.log('%s listening at %s', server.name, server.url);
 });
 ```
 <br>
-#### Make sure that you add the line, if you are using restify.
+#### Make sure that you add the line, so that the auto wiring is done.
 ```console
-cs.init(server, {resourceName : 'swag', // resource name
-                 server: 'restify'})    // server library name
+sre.init(server, {
+		  resourceName : 'swag',
+		  server : 'restify', // or express
+		  httpMethods : ['GET', 'POST']
+		}
+       )
 ```
 
-#### Make sure that you add the line, if you are using express.
-```console
-cs.init(app, {resourceName: 'token', // resource name
-              server : 'express',    // server library name
-	      staticResourceFolder: __dirname + '/node_modules/swagger-ui/dist'})
-```
 <br>
 #### Crank up your server
 ```sh

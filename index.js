@@ -154,9 +154,11 @@ exports.init = function(serverObj, swaggerParams) {
     docs = swagger.createResource("/" + swaggerParams.resourceName)
     ignoreList.push("/" + swaggerParams.resourceName)
 
-    addToSwaggerDocs('GET', docs, serverObj)
-    addToSwaggerDocs('POST', docs, serverObj)
+    for (var i = 0; i < swaggerParams.httpMethods.length; i++) {
+	addToSwaggerDocs(swaggerParams.httpMethods[i] + '' , docs, serverObj)
+    }	
 
+    console.log('[Wired with swagger with the following params.]')
     console.log(JSON.stringify(pathAndParams));
 
 }
