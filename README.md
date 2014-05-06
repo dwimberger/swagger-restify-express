@@ -11,7 +11,7 @@ var restify =  require('restify')
 ```
 <br>
 
-#### Include clks-swagger where the REST paths are defined.
+#### Include swagger-restify-express in your project.
 ```console
 sre = require('swagger-restify-express')
 ```
@@ -26,11 +26,11 @@ var server = restify.createServer({
 server.pre(restify.pre.userAgentConnection());
 server.use(restify.bodyParser({ mapParams: false }));
 
-server.get('/acs/:id', function(req, res) {
+server.get('/xxx/:id', function(req, res) {
   res.send('hello from my REST server ' + req.params.name);
 });
 
-server.get('/acs/:id/getit/:here', function(req, res) {
+server.get('/xxx/:id/getit/:here', function(req, res) {
   res.send('hello from my REST server ' + req.params.name);
 });
 
