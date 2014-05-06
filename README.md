@@ -20,25 +20,25 @@ npm install swagger-doc
 
 #### Include clks-swagger where the REST paths are defined.
 ```console
-cs = require('../clks-swagger/clks-swagger.js')
+cs = require('swagger-restify-express')
 ```
 <br><br>
 
 #### Have the restify server running
 ```console
 var server = restify.createServer({
-  name:"Activity Stream REST server"
+  name:"My REST server"
 });
 
 server.pre(restify.pre.userAgentConnection());
 server.use(restify.bodyParser({ mapParams: false }));
 
 server.get('/acs/:id', function(req, res) {
-  res.send('hello from Activity Stream ' + req.params.name);
+  res.send('hello from my REST server ' + req.params.name);
 });
 
 server.get('/acs/:id/getit/:here', function(req, res) {
-  res.send('hello from Activity Stream ' + req.params.name);
+  res.send('hello from my REST server ' + req.params.name);
 });
 
 server.post('/offload', streamOffloader.offload);
@@ -80,7 +80,7 @@ http://localhost:3000/index.html
 http://localhost:3000/swag
 ```
 
-![alt tag](http://206.80.58.87/gitlab/b2b/clks-swagger/blob/master/swagger-ui.jpg)
+![alt tag](https://raw.githubusercontent.com/manojkumarmc/swagger-restify-express/master/swagger-ui.jpg)
 
 
 
