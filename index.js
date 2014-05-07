@@ -70,6 +70,8 @@ function addRestOptionsToDoc(httpMethod, restPath, docs) {
 	docs.get(restPath, restPath, {notes: restPath, nickname: restPath, parameters: getParametersForThePath('GET', restPath)})	
     } else if (httpMethod === 'POST') {
 	docs.post(restPath, restPath, {notes: restPath, nickname: restPath, parameters: getParametersForThePath('POST', restPath)})
+    } else if (httpMethod === 'PUT') {
+        docs.post(restPath, restPath, {notes: restPath, nickname: restPath, parameters: getParametersForThePath('PUT', restPath)})
     }
 }
 
@@ -124,16 +126,20 @@ function extendObject(object, inheritFromObj) {
 function bootStrap(serverObj) {
 
     if (getServerName('express')) {
+
 	serverObj.use(express.static(__dirname + '/node_modules/swagger-ui/dist'))
         serverObj.get('/index.html', function(req, res) {
 	    res.sendfile(__dirname + '/node_modules/swagger-ui/dist/index.html')
 	})
         ignoreList.push('/index.html')
+
     } else {
+
 	serverObj.get(/index\.html|\/css\/?.*|\/lib\/?.*|\/images\/?.*|\.js/, restify.serveStatic({
 	    'directory': __dirname + '/node_modules/swagger-ui/dist',
 	    'default': 'index.html'
 	}))	
+
     }
     
 }

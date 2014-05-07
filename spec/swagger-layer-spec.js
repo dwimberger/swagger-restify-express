@@ -1,4 +1,4 @@
-var clkstester = require('../clks-swagger.js'),
+var clkstester = require('../index.js'),
     ignoreList = [
                   '/resources.json', 
     	          '/index\.html|\/css\/?.*|\/lib\/?.*|\/images\/?.*|\.js/'
