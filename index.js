@@ -152,20 +152,26 @@ exports.init = function(serverObj, swaggerParams) {
 
     swaggerParamsFromServer =  extendObject(swaggerParamsFromServer, swaggerParams)
     bootStrap(serverObj)
-    
-    swagger.configure(serverObj, {
-	version: "0.1"
-    })
 
-    docs = swagger.createResource("/" + swaggerParams.resourceName)
-    ignoreList.push("/" + swaggerParams.resourceName)
+    if ((swaggerParams.basePath === undefined) || (swaggerParams.basePath.trim() === '')) {
+	console.log('[CRITICAL ERROR - basePath param for swagger-restify-express is not defined.]')
+    } else {
+	swagger.configure(serverObj, {
+	    version: "0.1",
+            basePath: swaggerParams.basePath
+	})
 
-    for (var i = 0; i < swaggerParams.httpMethods.length; i++) {
-	addToSwaggerDocs(swaggerParams.httpMethods[i] + '' , docs, serverObj)
-    }	
+	docs = swagger.createResource("/" + swaggerParams.resourceName)
+	ignoreList.push("/" + swaggerParams.resourceName)
 
-    console.log('[Wired with swagger with the following params.]')
-    console.log(JSON.stringify(pathAndParams));
+	for (var i = 0; i < swaggerParams.httpMethods.length; i++) {
+	    addToSwaggerDocs(swaggerParams.httpMethods[i] + '' , docs, serverObj)
+	}	
+
+	console.log('[Wired swagger with the following params.]')	
+	console.log(JSON.stringify(pathAndParams));
+
+    }
 
 }
 

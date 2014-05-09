@@ -39,7 +39,8 @@ server.post('/offload', someClass.offload);
 sre.init(server, {
 		  resourceName : 'swag',
 		  server : 'restify', // or express
-		  httpMethods : ['GET', 'POST']
+		  httpMethods : ['GET', 'POST'],
+		  basePath : 'https://yourdomain.com'
 		}
        )
 
@@ -53,7 +54,8 @@ server.listen(3000, function() {
 sre.init(server, {
 		  resourceName : 'swag',
 		  server : 'restify', // or express
-		  httpMethods : ['GET', 'POST']
+		  httpMethods : ['GET', 'POST'],
+		  basePath : 'https://yourdomain.com'  // MANDATORY
 		}
        )
 ```
