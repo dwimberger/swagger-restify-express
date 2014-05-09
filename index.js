@@ -2,10 +2,11 @@ var swagger       = require('swagger-doc'),
     restify       = require('restify'),
     express       = require('express'),
     filePath      = require('path'),
+    fs            = require('fs'),
     docs,
     ignoreList    = [
                       '/resources.json', 
-    	              '/index\.html|\/css\/?.*|\/lib\/?.*|\/images\/?.*|\.js/'
+    	              '/api-docs|index\.html|\/css\/?.*|\/lib\/?.*|\/images\/?.*|\.js/'
 		    ],
     pathAndParams = {"GET":[],"POST":[],"PUT":[],"DELETE":[],"HEAD":[]},
     swaggerParamsFromServer = {};
@@ -128,14 +129,19 @@ function bootStrap(serverObj) {
     if (getServerName('express')) {
 
 	serverObj.use(express.static(__dirname + '/node_modules/swagger-ui/dist'))
-        serverObj.get('/index.html', function(req, res) {
+
+	serverObj.get('/index.html', function(req,res) {
+	    res.send({message : 'Invalid Request'})
+	}) 
+
+        serverObj.get('/api-docs', function(req, res) {
 	    res.sendfile(__dirname + '/node_modules/swagger-ui/dist/index.html')
 	})
         ignoreList.push('/index.html')
 
     } else {
 
-	serverObj.get(/index\.html|\/css\/?.*|\/lib\/?.*|\/images\/?.*|\.js/, restify.serveStatic({
+	serverObj.get(/index\.html\/css\/?.*|\/lib\/?.*|\/images\/?.*|\.js/, restify.serveStatic({
 	    'directory': __dirname + '/node_modules/swagger-ui/dist',
 	    'default': 'index.html'
 	}))	
