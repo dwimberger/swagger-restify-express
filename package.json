@@ -1,6 +1,6 @@
 {
   "name": "swagger-restify-express",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "This module will automagically wire your restify and express paths to swagger framework.",
   "main": "index.js",
   "scripts": {

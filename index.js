@@ -56,7 +56,7 @@ function addToSwaggerDocs(httpMethod, docs, serverObj) {
 
     for (var idx = 0; idx < hLength; idx++) {
             path = getHttpPathFromPathAry(httpPathAry, httpMethod, idx)
-	    if (inIgnoreList(path, ignoreList) === false) {
+	    if ((inIgnoreList(path, ignoreList) === false) && (path.indexOf('?') < 0))  {
                 paramsObj = generateParamsForSwagger(httpMethod, path) 
                 pathAndParams[httpMethod].push(paramsObj)		
 		addRestOptionsToDoc(httpMethod, paramsObj.path, docs)
@@ -71,7 +71,7 @@ function addRestOptionsToDoc(httpMethod, restPath, docs) {
     } else if (httpMethod === 'POST') {
 	docs.post(restPath, restPath, {notes: restPath, nickname: restPath, parameters: getParametersForThePath('POST', restPath)})
     } else if (httpMethod === 'PUT') {
-        docs.post(restPath, restPath, {notes: restPath, nickname: restPath, parameters: getParametersForThePath('PUT', restPath)})
+        docs.put(restPath, restPath, {notes: restPath, nickname: restPath, parameters: getParametersForThePath('PUT', restPath)})
     }
 }
 
