@@ -68,7 +68,7 @@ node app.js
 <br>
 #### Open up your browser
 ```sh
-http://localhost:3000/index.html
+http://localhost:3000/api-docs.html
 ```
 
 <br>

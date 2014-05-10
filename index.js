@@ -6,7 +6,7 @@ var swagger       = require('swagger-doc'),
     docs,
     ignoreList    = [
                       '/resources.json', 
-    	              '/api-docs|index\.html|\/css\/?.*|\/lib\/?.*|\/images\/?.*|\.js/'
+    	              '/api-docs\.html|\/css\/?.*|\/lib\/?.*|\/images\/?.*|\.js/'
 		    ],
     pathAndParams = {"GET":[],"POST":[],"PUT":[],"DELETE":[],"HEAD":[]},
     swaggerParamsFromServer = {};
@@ -126,24 +126,34 @@ function extendObject(object, inheritFromObj) {
 
 function bootStrap(serverObj) {
 
+    var distPath = __dirname + '/node_modules/swagger-ui/dist'
+
+    fs.exists(distPath + '/index.html', function(exists) {
+	if (exists) {
+	    fs.rename(distPath + '/index.html', distPath + '/api-docs.html', function(err) {
+		if (err) { console.log('Error...could not rename resource.')}
+		console.log('Renamed the resource successfully.')
+	    })
+	}
+    })
+
     if (getServerName('express')) {
 
-	serverObj.use(express.static(__dirname + '/node_modules/swagger-ui/dist'))
+	serverObj.use(express.static(distPath))
 
 	serverObj.get('/index.html', function(req,res) {
 	    res.send({message : 'Invalid Request'})
 	}) 
 
-        serverObj.get('/api-docs', function(req, res) {
-	    res.sendfile(__dirname + '/node_modules/swagger-ui/dist/index.html')
+        serverObj.get('/api-docs.html', function(req, res) {
+	    res.sendfile(distPath + '/api-docs.html')
 	})
-        ignoreList.push('/index.html')
+        ignoreList.push('/api-docs.html')
 
     } else {
 
-	serverObj.get(/index\.html\/css\/?.*|\/lib\/?.*|\/images\/?.*|\.js/, restify.serveStatic({
-	    'directory': __dirname + '/node_modules/swagger-ui/dist',
-	    'default': 'index.html'
+	serverObj.get(/api-docs\.html|\/css\/?.*|\/lib\/?.*|\/images\/?.*|\.js/, restify.serveStatic({
+	    'directory': distPath
 	}))	
 
     }
