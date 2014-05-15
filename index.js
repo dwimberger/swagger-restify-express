@@ -131,8 +131,7 @@ function bootStrap(serverObj) {
     var windowLocationHref = swaggerParamsFromServer.basePath + '/api-docs.html#!/' + swaggerParamsFromServer.resourceName;
     var fileStr = '';
 
-    console.log(basePathResource)
-    console.log(windowLocationHref)
+    console.log('[Resource path : ' + basePathResource  +']')
 
     fs.exists(distPath + '/index.html', function(exists) {
 	if (exists) {
@@ -143,9 +142,9 @@ function bootStrap(serverObj) {
 	}
     })
 
-    fs.exists('./template/api-docs.html', function(exists) {
+    fs.exists(__dirname + '/template/api-docs.html', function(exists) {
 	if (exists) {
-	    fs.readFile('./template/api-docs.html', 'utf8', function(err, data) {
+	    fs.readFile(__dirname + '/template/api-docs.html', 'utf8', function(err, data) {
 		fileStr = data
 		fileStr = fileStr.replace(/BASE_PATH_RESOURCE/g, basePathResource)
 		fileStr = fileStr.replace(/WINDOW_LOCATION_HREF/g, windowLocationHref)
