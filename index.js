@@ -126,13 +126,35 @@ function extendObject(object, inheritFromObj) {
 
 function bootStrap(serverObj) {
 
-    var distPath = __dirname + '/node_modules/swagger-ui/dist'
+    var distPath = __dirname + '/node_modules/swagger-ui/dist';
+    var basePathResource  = swaggerParamsFromServer.basePath + '/' + swaggerParamsFromServer.resourceName;
+    var windowLocationHref = swaggerParamsFromServer.basePath + '/api-docs.html#!/' + swaggerParamsFromServer.resourceName;
+    var fileStr = '';
+
+    console.log(basePathResource)
+    console.log(windowLocationHref)
 
     fs.exists(distPath + '/index.html', function(exists) {
 	if (exists) {
 	    fs.rename(distPath + '/index.html', distPath + '/api-docs.html', function(err) {
 		if (err) { console.log('Error...could not rename resource.')}
 		console.log('Renamed the resource successfully.')
+	    })
+	}
+    })
+
+    fs.exists('./template/api-docs.html', function(exists) {
+	if (exists) {
+	    fs.readFile('./template/api-docs.html', 'utf8', function(err, data) {
+		fileStr = data
+		fileStr = fileStr.replace(/BASE_PATH_RESOURCE/g, basePathResource)
+		fileStr = fileStr.replace(/WINDOW_LOCATION_HREF/g, windowLocationHref)
+		
+		fs.writeFile(distPath + '/api-docs.html', fileStr, 'utf8', function(err) {
+		    if (err) { throw new Error() }
+		    console.log('[Base path resource and window location updated]')
+		})
+
 	    })
 	}
     })
