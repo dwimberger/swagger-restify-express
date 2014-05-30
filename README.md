@@ -40,7 +40,8 @@ sre.init(server, {
 		  resourceName : 'swag',
 		  server : 'restify', // or express
 		  httpMethods : ['GET', 'POST'],
-		  basePath : 'https://yourdomain.com'
+		  basePath : 'https://yourdomain.com',
+		  ignorePaths : []
 		}
        )
 
@@ -55,7 +56,8 @@ sre.init(server, {
 		  resourceName : 'swag',
 		  server : 'restify', // or express
 		  httpMethods : ['GET', 'POST'],
-		  basePath : 'https://yourdomain.com'  // MANDATORY
+		  basePath : 'https://yourdomain.com',  // MANDATORY
+		  ignorePaths : []
 		}
        )
 ```
@@ -69,13 +71,8 @@ node app.js
 #### Open up your browser
 ```sh
 http://localhost:3000/api-docs.html
-```
+``
 
-<br>
-#### In your resource entry edit box
-```console
-http://localhost:3000/swag
-```
 
 ![alt tag](https://raw.githubusercontent.com/manojkumarmc/swagger-restify-express/master/swagger-ui.jpg)
 
