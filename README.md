@@ -71,7 +71,7 @@ node app.js
 #### Open up your browser
 ```sh
 http://localhost:3000/api-docs.html
-``
+```
 
 
 ![alt tag](https://raw.githubusercontent.com/manojkumarmc/swagger-restify-express/master/swagger-ui.jpg)
