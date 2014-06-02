@@ -60,10 +60,18 @@ function addToSwaggerDocs(httpMethod, docs, serverObj) {
 	    if ((inIgnoreList(path, ignoreList) === false) && (path.indexOf('?') < 0))  {
                 paramsObj = generateParamsForSwagger(httpMethod, path) 
                 pathAndParams[httpMethod].push(paramsObj)		
-		addRestOptionsToDoc(httpMethod, paramsObj.path, docs)
+		if (!(inIgnorePaths(httpMethod, paramsObj.path))) {
+		    addRestOptionsToDoc(httpMethod, paramsObj.path, docs)		    
+		}
 	    }
     }
 
+}
+
+function inIgnorePaths(httpMethod, httpPath) {
+    return ((swaggerParamsFromServer.ignorePaths) && 
+    	    (swaggerParamsFromServer.ignorePaths[httpMethod]) && 
+    	    (swaggerParamsFromServer.ignorePaths[httpMethod].indexOf(httpPath) >= 0))
 }
 
 function addRestOptionsToDoc(httpMethod, restPath, docs) {

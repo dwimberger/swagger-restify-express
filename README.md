@@ -41,7 +41,10 @@ sre.init(server, {
 		  server : 'restify', // or express
 		  httpMethods : ['GET', 'POST'],
 		  basePath : 'https://yourdomain.com',
-		  ignorePaths : []
+		  ignorePaths : {
+		  	      GET : ['path1', 'path2'],
+			      POST : ['path1']
+		  }
 		}
        )
 
@@ -57,7 +60,10 @@ sre.init(server, {
 		  server : 'restify', // or express
 		  httpMethods : ['GET', 'POST'],
 		  basePath : 'https://yourdomain.com',  // MANDATORY
-		  ignorePaths : []
+		  ignorePaths : {
+		  	      GET : ['path1', 'path2'],
+			      POST : ['path1']
+		  }
 		}
        )
 ```
