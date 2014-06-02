@@ -139,12 +139,6 @@ function bootStrap(serverObj) {
     var windowLocationHref = swaggerParamsFromServer.basePath + '/api-docs.html#!/' + swaggerParamsFromServer.resourceName;
     var fileStr = '';
 
-    if (swaggerParamsFromServer.ignoreList) {
-	swaggerParamsFromServer.ignorePaths.forEach(function(ignorePath) {
-	    ignoreList.push(ignorePath)
-	})
-    }
-
     console.log('[Resource path : ' + basePathResource  +']')
 
     fs.exists(distPath + '/index.html', function(exists) {
