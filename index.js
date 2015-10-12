@@ -75,12 +75,15 @@ function inIgnorePaths(httpMethod, httpPath) {
 }
 
 function addRestOptionsToDoc(httpMethod, restPath, docs) {
+     
     if (httpMethod === 'GET') {
-	docs.get(restPath, restPath, {notes: restPath, nickname: restPath, parameters: getParametersForThePath('GET', restPath)})	
+		docs.get(restPath, restPath, {tags: ['all'], notes: restPath, nickname: restPath, parameters: getParametersForThePath('GET', restPath)})	
     } else if (httpMethod === 'POST') {
-	docs.post(restPath, restPath, {notes: restPath, nickname: restPath, parameters: getParametersForThePath('POST', restPath)})
+		docs.post(restPath, restPath, {tags: ['all'],notes: restPath, nickname: restPath, parameters: getParametersForThePath('POST', restPath)})
     } else if (httpMethod === 'PUT') {
-        docs.put(restPath, restPath, {notes: restPath, nickname: restPath, parameters: getParametersForThePath('PUT', restPath)})
+        docs.put(restPath, restPath, {tags: ['all'], notes: restPath, nickname: restPath, parameters: getParametersForThePath('PUT', restPath)})
+    } else if (httpMethod === 'DELETE') {
+        docs.delete(restPath, restPath, {tags: ['all'], notes: restPath, nickname: restPath, parameters: getParametersForThePath('DELETE', restPath)})
     }
 }
 
@@ -202,14 +205,15 @@ exports.init = function(serverObj, swaggerParams) {
 	console.log('[CRITICAL ERROR - basePath param for swagger-restify-express is not defined.]')
     } else {
 	swagger.configure(serverObj, {
-	    version: "0.1",
-            basePath: swaggerParams.basePath
-	})
+	        version: swaggerParams.version,
+            basePath: swaggerParams.basePath,
+			tags: swaggerParams.tags            
+	});
 
 	docs = swagger.createResource("/" + swaggerParams.resourceName)
 	ignoreList.push("/" + swaggerParams.resourceName)
 
-	for (var i = 0; i < swaggerParams.httpMethods.length; i++) {
+	for (var i = 0; i < swaggerParams.httpMethods.length; i++) {		
 	    addToSwaggerDocs(swaggerParams.httpMethods[i] + '' , docs, serverObj)
 	}	
 
@@ -219,5 +223,3 @@ exports.init = function(serverObj, swaggerParams) {
     }
 
 }
-
-
